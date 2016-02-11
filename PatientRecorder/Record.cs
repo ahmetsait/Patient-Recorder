@@ -39,11 +39,12 @@ namespace PatientRecorder
 		[ProtoMember(4)]
 		public int sumPayed;
 
-		public CheckPoint(ref DateTime date, int payment, int payed)
+		public CheckPoint(ref DateTime date, int payment, int payed, int sumPayed)
 		{
 			this.date = date;
 			this.payment = payment;
 			this.payed = payed;
+			this.sumPayed = sumPayed;
 		}
 	}
 
