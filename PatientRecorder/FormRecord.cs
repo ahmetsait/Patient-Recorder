@@ -241,7 +241,7 @@ namespace PatientRecorder
 				{
 					if (record.checkPoints == null)
 						record.checkPoints = new List<CheckPoint>();
-					if (record.checkPoints.Count == 0 || record.checkPoints.Count > 0 && (record.checkPoints[record.checkPoints.Count - 1].payed != record.payed || record.checkPoints[record.checkPoints.Count - 1].payment != record.payment))
+					if (record.checkPoints.Count == 0 || record.checkPoints.Count > 0 && (record.payed != 0 || record.checkPoints[record.checkPoints.Count - 1].payment != record.payment))
 					{
 						record.checkPoints.Add(new CheckPoint(ref record.dateModification, record.payment, payed, record.payed));
 					}
