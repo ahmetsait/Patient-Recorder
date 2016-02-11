@@ -36,6 +36,8 @@ namespace PatientRecorder
 		public int payment;
 		[ProtoMember(3)]
 		public int payed;
+		[ProtoMember(4)]
+		public int sumPayed;
 
 		public CheckPoint(ref DateTime date, int payment, int payed)
 		{
