@@ -88,7 +88,7 @@ namespace PatientRecorder
 			{
 				if (payment >= payed)
 				{
-					Loan = payment - payed;
+					Loan = payment - payed - (record == null ? 0 : record.payed);
 				}
 			}
 			else
