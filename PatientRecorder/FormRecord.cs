@@ -55,7 +55,7 @@ namespace PatientRecorder
 					{
 						var check = record.checkPoints[i];
 						ListViewItem item = new ListViewItem(check.date.ToShortDateString());
-						item.SubItems.AddRange(new string[] { check.payment.ToString(), check.payed.ToString(), (check.payment - check.payed).ToString() });
+						item.SubItems.AddRange(new string[] { check.payment.ToString(), check.payed.ToString(), check.sumPayed.ToString(), (check.payment - check.payed).ToString() });
 						listViewCheckPoint.Items.Add(item);
 					}
 				}
@@ -223,11 +223,15 @@ namespace PatientRecorder
 					jobs.Add(item.Text);
 				record.jobs = jobs;
 
+				int payed = int.Parse(textBoxPayed.Text);
+
 				record.payment = int.Parse(textBoxPayment.Text);
 				if (isNew)
-					record.payed = int.Parse(textBoxPayed.Text);
+					record.payed = payed;
 				else
-					record.payed += int.Parse(textBoxPayed.Text);
+				{
+					record.payed += payed;
+				}
 				record.dateCreation = dateTimePickerCreation.Value;
 				record.dateModification = dateTimePickerModification.Value;
 				record.description = textBoxDescription.Text;
@@ -240,7 +244,7 @@ namespace PatientRecorder
 						record.checkPoints = new List<CheckPoint>();
 					if (record.checkPoints.Count == 0 || record.checkPoints.Count > 0 && (record.checkPoints[record.checkPoints.Count - 1].payed != record.payed || record.checkPoints[record.checkPoints.Count - 1].payment != record.payment))
 					{
-						record.checkPoints.Add(new CheckPoint(ref record.dateModification, record.payment, record.payed));
+						record.checkPoints.Add(new CheckPoint(ref record.dateModification, record.payment, payed, record.payed));
 					}
 				}
 			}
