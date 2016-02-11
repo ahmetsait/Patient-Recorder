@@ -55,7 +55,7 @@ namespace PatientRecorder
 					{
 						var check = record.checkPoints[i];
 						ListViewItem item = new ListViewItem(check.date.ToShortDateString());
-						item.SubItems.AddRange(new string[] { check.payment.ToString(), check.payed.ToString(), check.sumPayed.ToString(), (check.payment - check.payed).ToString() });
+						item.SubItems.AddRange(new string[] { check.payment.ToString(), check.payed.ToString(), check.sumPayed.ToString(), (check.payment - check.sumPayed).ToString() });
 						listViewCheckPoint.Items.Add(item);
 					}
 				}
@@ -223,22 +223,21 @@ namespace PatientRecorder
 					jobs.Add(item.Text);
 				record.jobs = jobs;
 
+				record.payment = int.Parse(textBoxPayment.Text);
+
 				int payed = int.Parse(textBoxPayed.Text);
 
-				record.payment = int.Parse(textBoxPayment.Text);
 				if (isNew)
 					record.payed = payed;
 				else
-				{
 					record.payed += payed;
-				}
+				
 				record.dateCreation = dateTimePickerCreation.Value;
 				record.dateModification = dateTimePickerModification.Value;
 				record.description = textBoxDescription.Text;
 				record.closed = checkBoxCloseRecord.Checked;
 				record.color = (DentColor)comboBoxColor.SelectedIndex;
 
-				if (!isNew)
 				{
 					if (record.checkPoints == null)
 						record.checkPoints = new List<CheckPoint>();
